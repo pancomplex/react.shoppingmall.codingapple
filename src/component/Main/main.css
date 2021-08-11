@@ -1,0 +1,23 @@
+.jumbotron {
+  height: 50vh;
+  margin: 10px 0;
+  padding: 0 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: url(../../assets/images/background.jpg) no-repeat center / cover;
+  color: #fff;
+}
+.jumbotron h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px black;
+}
+
+.jumbotron p {
+  padding: 15px 30px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
