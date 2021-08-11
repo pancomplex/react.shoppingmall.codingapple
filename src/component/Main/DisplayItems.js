@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { Row, Col, Image } from "react-bootstrap";
 
 function DisplayItems(props) {
-  // const history = useHistory();
-  // const showDetail = () => {
-  //   history.push(`/detail/${props.id}`);
-  // };
   return (
     <Col
       md={4}
@@ -18,11 +14,8 @@ function DisplayItems(props) {
       }}
       as={Link}
       to={`/detail/${props.id}`}
-      // onClick={() => {
-      //   showDetail();
-      // }}
     >
-      <Image src={props.image} fluid></Image>
+      <Image src={props.image} fluid />
       <h4
         style={{
           fontWeight: "700",

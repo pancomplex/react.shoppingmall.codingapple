@@ -6,10 +6,12 @@ import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 function Detail(props) {
   const [show, setShow] = useState(true);
   useEffect(() => {
-    setTimeout(() => {
-      console.log("setTimeout");
+    const showTimer = setTimeout(() => {
       setShow(false);
     }, 2000);
+    return () => {
+      clearTimeout(showTimer);
+    };
   }, []);
   const history = useHistory();
   const data = props.data;

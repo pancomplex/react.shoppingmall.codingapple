@@ -13,6 +13,7 @@ function Main(props) {
     data.map((item) => {
       items.push(
         <DisplayItems
+          key={item.id}
           id={item.id}
           title={item.title}
           content={item.content}
