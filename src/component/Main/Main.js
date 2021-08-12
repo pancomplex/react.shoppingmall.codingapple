@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import axios from "axios";
 
 import DisplayItems from "./DisplayItems";
 
@@ -6,12 +8,14 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import "./main.css";
 
 function Main(props) {
-  const data = props.data;
+  const items = props.data;
+  const [showBtn, setShowBtn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const renderDisplayItems = () => {
-    let items = [];
-    data.map((item) => {
-      items.push(
+  const renderDisplayItems = (items) => {
+    let itemsArray = [];
+    items.map((item) => {
+      itemsArray.push(
         <DisplayItems
           key={item.id}
           id={item.id}
@@ -22,11 +26,11 @@ function Main(props) {
         />
       );
     });
-    return items;
+    return itemsArray;
   };
 
   return (
-    <div>
+    <div className="Main">
       <div className="jumbotron">
         <h1>20% Season Off</h1>
         <p>
@@ -38,8 +42,31 @@ function Main(props) {
         <Button variant="primary">Learn more</Button>
       </div>
 
-      <Container>
-        <Row>{renderDisplayItems()}</Row>
+      <Container className="displayItems">
+        <Row>{renderDisplayItems(items)}</Row>
+
+        {showBtn && (
+          <Button
+            variant="primary"
+            disabled={isLoading}
+            onClick={() => {
+              setIsLoading(true);
+              axios
+                .get("https://codingapple1.github.io/shop/data2.json")
+                .then((result) => {
+                  setShowBtn(false);
+                  props.itemsUpdate(result.data);
+                  setIsLoading(false);
+                })
+                .catch((err) => {
+                  console.err(err);
+                  setIsLoading(false);
+                });
+            }}
+          >
+            {isLoading ? "로딩중..." : "더보기"}
+          </Button>
+        )}
       </Container>
     </div>
   );

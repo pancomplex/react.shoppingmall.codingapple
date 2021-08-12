@@ -12,6 +12,26 @@ import Detail from "./component/Detail/Detail";
 
 function App() {
   const [items, setItems] = useState(data);
+  const [stocks, setStocks] = useState([10, 11, 12]);
+
+  const itemsUpdate = (newItems) => {
+    let updatedItems = [...items, ...newItems];
+    updatedItems.map((item) => {
+      if (!item.image) {
+        item.image = `https://codingapple1.github.io/shop/shoes${item.id}.jpg`;
+      }
+    });
+    setItems(updatedItems);
+  };
+
+  const orderItem = (id) => {
+    let stocksArray = stocks;
+    stocksArray[id]--;
+    console.log("order, id: " + id + ", stocksArray: " + stocksArray);
+    setStocks(stocksArray);
+    console.log("stocks: ", stocks);
+  };
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -41,10 +61,10 @@ function App() {
       </Navbar>
       <Switch>
         <Route exact path="/">
-          <Main data={items} />
+          <Main data={items} itemsUpdate={itemsUpdate} />
         </Route>
         <Route path="/detail/:id">
-          <Detail data={items} />
+          <Detail data={items} stocks={stocks} orderItem={orderItem} />
         </Route>
       </Switch>
     </div>

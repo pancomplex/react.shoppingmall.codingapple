@@ -4,7 +4,15 @@ import { useParams, useHistory } from "react-router-dom";
 import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 
 function Detail(props) {
+  const data = props.data;
+  const { id } = useParams();
+  const [stock, setStock] = useState(props.stocks[id]);
   const [show, setShow] = useState(true);
+
+  const history = useHistory();
+
+  console.log("Detail에서의 props 갱신, stock: ", stock);
+
   useEffect(() => {
     const showTimer = setTimeout(() => {
       setShow(false);
@@ -13,14 +21,10 @@ function Detail(props) {
       clearTimeout(showTimer);
     };
   }, []);
-  const history = useHistory();
-  const data = props.data;
-  const { id } = useParams();
 
   let thisItem = data.find((item) => {
     return item.id == id;
   });
-  if (!id) id = 0;
 
   return (
     <Container>
@@ -46,8 +50,16 @@ function Detail(props) {
           <h4>{thisItem.title}</h4>
           <p>{thisItem.content}</p>
           <p>{thisItem.price}원</p>
+          <p>재고 : {stock}</p>
           <div>
-            <Button variant="danger">주문하기</Button>
+            <Button
+              variant="danger"
+              onClick={() => {
+                props.orderItem(id);
+              }}
+            >
+              주문하기
+            </Button>
             <Button
               variant="danger"
               style={{
