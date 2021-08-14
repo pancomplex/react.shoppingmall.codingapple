@@ -12,22 +12,22 @@ function Main(props) {
   const [showBtn, setShowBtn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const renderDisplayItems = (items) => {
-    let itemsArray = [];
-    items.map((item) => {
-      itemsArray.push(
-        <DisplayItems
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          content={item.content}
-          price={item.price}
-          image={item.image}
-        />
-      );
-    });
-    return itemsArray;
-  };
+  // const renderDisplayItems = (items) => {
+  //   let itemsArray = [];
+  //   items.map((item) => {
+  //     itemsArray.push(
+  //       <DisplayItems
+  //         key={item.id}
+  //         id={item.id}
+  //         title={item.title}
+  //         content={item.content}
+  //         price={item.price}
+  //         image={item.image}
+  //       />
+  //     );
+  //   });
+  //   return itemsArray;
+  // };
 
   return (
     <div className="Main">
@@ -43,7 +43,23 @@ function Main(props) {
       </div>
 
       <Container className="displayItems">
-        <Row>{renderDisplayItems(items)}</Row>
+        <Row>
+          {
+            // renderDisplayItems(items)
+            items.map((item) => {
+              return (
+                <DisplayItems
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  content={item.content}
+                  price={item.price}
+                  image={item.image}
+                />
+              );
+            })
+          }
+        </Row>
 
         {showBtn && (
           <Button

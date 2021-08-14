@@ -25,7 +25,7 @@ function App() {
   };
 
   const orderItem = (id) => {
-    let stocksArray = stocks;
+    let stocksArray = [...stocks];
     stocksArray[id]--;
     console.log("order, id: " + id + ", stocksArray: " + stocksArray);
     setStocks(stocksArray);
