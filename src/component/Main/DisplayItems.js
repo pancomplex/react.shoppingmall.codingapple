@@ -13,7 +13,7 @@ function DisplayItems(props) {
         alignItems: "center",
       }}
       as={Link}
-      to={`/detail/${props.id}`}
+      to={props.repository + `/detail/${props.id}`}
     >
       <Image src={props.image} fluid />
       <h4

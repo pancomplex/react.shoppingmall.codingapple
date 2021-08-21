@@ -9,10 +9,13 @@ import "./App.css";
 
 import Main from "./component/Main/Main";
 import Detail from "./component/Detail/Detail";
+import Cart from "./component/Cart";
 
 function App() {
   const [items, setItems] = useState(data);
   const [stocks, setStocks] = useState([10, 11, 12]);
+
+  const repository = "/react.shoppingmall.codingapple.build";
 
   const itemsUpdate = (newItems) => {
     let updatedItems = [...items, ...newItems];
@@ -36,16 +39,16 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to={repository + "/"}>
             ShoeShop
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to={repository + "/"}>
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/detail">
+              <Nav.Link as={Link} to={repository + "/detail"}>
                 Detail
               </Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -60,11 +63,14 @@ function App() {
         </Container>
       </Navbar>
       <Switch>
-        <Route exact path="/">
-          <Main data={items} itemsUpdate={itemsUpdate} />
+        <Route exact path={repository + "/"}>
+          <Main data={items} itemsUpdate={itemsUpdate} repository={repository} />
         </Route>
-        <Route path="/detail/:id">
+        <Route path={repository + "/detail/:id"}>
           <Detail data={items} stocks={stocks} orderItem={orderItem} />
+        </Route>
+        <Route path={repository + "/cart"}>
+          <Cart />
         </Route>
       </Switch>
     </div>

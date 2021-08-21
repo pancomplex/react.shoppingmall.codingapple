@@ -55,6 +55,7 @@ function Main(props) {
                   content={item.content}
                   price={item.price}
                   image={item.image}
+                  repository={props.repository}
                 />
               );
             })
